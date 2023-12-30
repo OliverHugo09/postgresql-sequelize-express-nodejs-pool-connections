@@ -1,11 +1,17 @@
 const defineAssociations = (models) => {
     const { User, Package, Url, Server } = models;
 
-    // Define tus asociaciones aquí
-    Package.belongsToMany(Url, { through: 'packages_list', foreignKey: 'packageId', as: 'urls' });
-    Url.belongsToMany(Package, { through: 'packages_list', foreignKey: 'urlId', as: 'packages' });
-    Url.hasOne(Server, { as: "server", foreignKey: "serverId" });
-    Server.belongsTo(Url, { as: "url", foreignKey: "serverId" });
+    // Uno a uno, 1 a 1
+    // Url tiene un solo server
+    Server.hasOne(Url, { foreignKey: "serverId" });
+
+    // Uno a muchos, 1 a N
+    // Package va a tener muchas urls
+    Package.hasMany(Url, { foreignKey: "packageId" });
+
+    // // Se añade una clave packageId a la tabla url
+    Url.belongsTo(Package, { as: "packageData", foreignKey: "packageId" });
+
 };
 
 module.exports = defineAssociations;

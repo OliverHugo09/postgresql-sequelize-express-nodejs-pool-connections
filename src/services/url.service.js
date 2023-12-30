@@ -1,11 +1,19 @@
 const { models } = require('../libs/sequelize');
+const { Package } = require('../db/models/package.model');
+const { Server } = require('../db/models/server.model');
 
 class UrlService {
 
     constructor() { }
 
     async find() {
-        const res = await models.Url.findAll();
+        const res = await models.Url.findAll({
+            include: {
+                model: Package,
+                as: "packageData",
+                attributes: ['package_name', 'thumbnails_url']
+            }
+        });
         return res;
     }
 

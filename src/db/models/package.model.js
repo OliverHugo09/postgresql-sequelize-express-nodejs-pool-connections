@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const defineAssociations = require('../associations');
 
 const PACKAGE_TABLE = 'packages';
 
@@ -11,8 +12,8 @@ class Package extends Model {
             timestamps: true
         }
     }
-    static associate(models) {
-        Package.belongsToMany(Url, { through: 'packages_list', foreignKey: 'packageId', as: 'urls' });
+    static defineAssociations(models) {
+        defineAssociations(models);
     }
 }
 

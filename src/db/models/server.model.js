@@ -11,8 +11,8 @@ class Server extends Model {
             timestamps: true
         }
     }
-    static associate(models) {
-        Server.belongsTo(models.Url, { foreignKey: 'urlId' }); // Asumiendo que 'urlId' es la clave foránea en Server que hace referencia a Url
+    static defineAssociations(models) {
+        defineAssociations(models);
     }
 }
 

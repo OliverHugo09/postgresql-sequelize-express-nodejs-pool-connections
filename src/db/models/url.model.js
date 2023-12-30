@@ -11,8 +11,8 @@ class Url extends Model {
             timestamps: true
         }
     }
-    static associate(models) {
-        Url.hasOne(models.Server, { foreignKey: 'urlId' }); // Asumiendo que 'urlId' es la clave foránea en Server que hace referencia a Url
+    static defineAssociations(models) {
+        defineAssociations(models);
     }
 }
 
